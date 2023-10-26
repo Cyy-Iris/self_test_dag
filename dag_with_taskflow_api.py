@@ -4,7 +4,7 @@ from airflow.decorators import dag, task
 
 
 default_args = {
-    'owner': 'coder2j',
+    'owner': 'yiyu',
     'retries': 5,
     'retry_delay': timedelta(minutes=5)
 }
