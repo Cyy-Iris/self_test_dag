@@ -19,7 +19,7 @@ with DAG(
     namespace="airflow",
     image="debian",
     cmds=["echo", "Hello, World!"],
-    label={"testname":"k8s_operator_test"},
+    labels={"app":"k8s_operator_test"},
     task_id="k8s_Operator_demo",
     do_xcom_push=True,
 )
