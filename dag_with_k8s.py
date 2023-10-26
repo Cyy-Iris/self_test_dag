@@ -17,7 +17,7 @@ with DAG(
     task1 = KubernetesPodOperator(
     name="k8s_Operator_test",
     image="debian",
-    cmds=["pip list"],
+    cmds=["pip","list"],
     label={"k8s_operator_test"},
     task_id="k8s_Operator_demo",
     do_xcom_push=True,
