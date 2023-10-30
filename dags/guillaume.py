@@ -28,9 +28,9 @@ def main():
     it takes as parameter a full path to a pdf file in s3. If the pdf_path parameter
     provided is only a file it will use the following folder `"s3://raw_pdf/"`.
     """
-    @task.kubernetes(image="python-guillaume:0.0.1", namespace="airflow", in_cluster=True,env_vars={"MY_PARAMETER": "{{ params.my_parameter }}"})
+    @task.kubernetes(image="python-guillaume:0.0.1", namespace="airflow", in_cluster=True)
     #def starting_task() -> dict[str, str]:
-    def starting_task():
+    def starting_task(**context):
         """Starting task initiating the chain of dependency based on the DAG params.
 
         it loads the pdf file path provided as parameter of the DAG using the context
@@ -48,8 +48,8 @@ def main():
         if "params" not in context:
             raise KeyError("DAG parameters couldn't be retrieved in current context.")
         """
-        my_parameter = os.environ.get("MY_PARAMETER")
-        filename: str = os.path.basename(my_parameter["pdf_path"])
+        print(context)
+        filename: str = os.path.basename(["pdf_path"])
         return {"s3://raw_pdf/": filename}
 
     # TODO (Guillaume): DAG could be generated automatically: a function could inspect
