@@ -14,8 +14,7 @@ import pendulum
     image="python:3.8-slim-buster",
     name="k8s_test",
     namespace="default",
-    in_cluster=True,
-    config_file=config.load_incluster_config(),
+    in_cluster=False,
 )
 def execute_in_k8s_pod():
     import time
