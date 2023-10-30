@@ -31,6 +31,7 @@ def main():
     @task.kubernetes(image="python-guillaume:0.0.1", namespace="airflow", in_cluster=True)
     #def starting_task() -> dict[str, str]:
     def starting_task(**context):
+        import os
         """Starting task initiating the chain of dependency based on the DAG params.
 
         it loads the pdf file path provided as parameter of the DAG using the context
