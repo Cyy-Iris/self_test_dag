@@ -52,11 +52,39 @@ def main():
     # TODO (Guillaume): DAG could be generated automatically: a function could inspect
     # the content of the `tasks` package and resolve a DAG based on s3 folder path
     # dependencies.
-    from automodeling.tasks.all_to_graph import all_to_graph_task
-    from automodeling.tasks.md_to_ontology import md_to_ontology_task
-    from automodeling.tasks.md_to_scenarios import md_to_scenarios_task
-    from automodeling.tasks.pdf_to_md import pdf_to_md_task
+
     # step 0: initiates airflow io to resolve file using the starting task.
+    @task.kubernetes(image="python-guillaume:0.0.1", namespace="airflow", in_cluster=True)
+    def starting_func():
+        return starting_task()
+
+    # step 1: 1st task converting PDF to MD
+    @task.kubernetes(image="python-guillaume:0.0.1", namespace="airflow", in_cluster=True)
+    def pdf_to_md_func(local_pdf_path: str):
+        from automodeling.tasks.pdf_to_md import pdf_to_md_task
+        return pdf_to_md_task(local_pdf_path)
+
+
+    # step 2: 2 tasks in parallel using previously generated MD
+    @task.kubernetes(image="python-guillaume:0.0.1", namespace="airflow", in_cluster=True)
+    def md_to_ontology_func(md_local_path: str):
+        from automodeling.tasks.pdf_to_md import md_to_ontology_task
+        return md_to_ontology_task(md_local_path)
+    
+    @task.kubernetes(image="python-guillaume:0.0.1", namespace="airflow", in_cluster=True)
+    def md_to_scenarios_func(md_local_path:str):
+        from automodeling.tasks.pdf_to_md import md_to_scenarios_task
+        return md_to_scenarios_task(md_local_path)
+
+    # step 3: Final tasks using both outputs of previous tasks
+    @task.kubernetes(image="python-guillaume:0.0.1", namespace="airflow", in_cluster=True)
+    def all_to_graph_func(ontology_local_path: str, scenarios_local_path: str):
+        from automodeling.tasks.pdf_to_md import all_to_graph_task
+        return all_to_graph_task(ontology_local_path, scenarios_local_path)
+
+    # return airflow_io_graph
+
+
     airflow_io_pdf = starting_task()
 
     # step 1: 1st task converting PDF to MD
@@ -69,7 +97,4 @@ def main():
     # step 3: Final tasks using both outputs of previous tasks
     airflow_io_graph = all_to_graph_task(airflow_io_ontology, airflow_io_scenarios)
 
-    # return airflow_io_graph
-
-
-main()
+dag_run=main()
