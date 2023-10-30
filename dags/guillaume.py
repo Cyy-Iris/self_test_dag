@@ -61,7 +61,7 @@ def main():
 
 
     # step 1: 1st task converting PDF to MD
-    @task.kubernetes(image="python-guillaume:0.0.1", namespace="airflow", in_cluster=True)
+    @task.kubernetes(image="python-guillaume:0.0.1", namespace="airflow", arguments=["/app"],in_cluster=True)
     def pdf_to_md_func(local_pdf_path: str):
         from automodeling.tasks.pdf_to_md import pdf_to_md_task
         return pdf_to_md_task(local_pdf_path)
