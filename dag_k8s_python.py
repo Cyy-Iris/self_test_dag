@@ -9,7 +9,6 @@ import pendulum
     tags=["k8s_python"],
     dag_id="dag_k8s_python",
 )
-
 @task.kubernetes(
     image="python:3.8-slim-buster",
     name="k8s_test",
@@ -38,5 +37,3 @@ def print_pattern():
 
 execute_in_k8s_pod_instance = execute_in_k8s_pod()
 print_pattern_instance = print_pattern()
-
-execute_in_k8s_pod_instance >> print_pattern_instance
