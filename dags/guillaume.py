@@ -8,11 +8,9 @@ It exposes:
     * :DAG:main: actual apache airflow DAG.
 """
 import os
-
 import pendulum
 from airflow.decorators import dag, task
 from airflow.models.param import Param
-from airflow.operators.python import get_current_context
 from airflow.providers.cncf.kubernetes.operators.pod import KubernetesPodOperator
 
 
@@ -30,9 +28,9 @@ def main():
     it takes as parameter a full path to a pdf file in s3. If the pdf_path parameter
     provided is only a file it will use the following folder `"s3://raw_pdf/"`.
     """
-    @task.kubernetes(image="python-guillaume:0.0.1", namespace="airflow", in_cluster=True)
+    @task.kubernetes(image="python-guillaume:0.0.1", namespace="airflow", in_cluster=True,env_vars={"MY_PARAMETER": "{{ params.my_parameter }}"})
     #def starting_task() -> dict[str, str]:
-    def starting_task(**kwargs):
+    def starting_task():
         """Starting task initiating the chain of dependency based on the DAG params.
 
         it loads the pdf file path provided as parameter of the DAG using the context
@@ -45,13 +43,13 @@ def main():
             next task and help the downstream task perform input file resolution from
             s3 folder path inputs definition.
         """
-        ti = kwargs['ti']  # Access the task instance
-        context = kwargs.get('Gauillaume_code_test', None)
-        print("This is context: "+context)
-        #context = get_current_context()
+        """
+        context = get_current_context()
         if "params" not in context:
             raise KeyError("DAG parameters couldn't be retrieved in current context.")
-        filename: str = os.path.basename(context["params"]["pdf_path"])
+        """
+        my_parameter = os.environ.get("MY_PARAMETER")
+        filename: str = os.path.basename(my_parameter["pdf_path"])
         return {"s3://raw_pdf/": filename}
 
     # TODO (Guillaume): DAG could be generated automatically: a function could inspect
