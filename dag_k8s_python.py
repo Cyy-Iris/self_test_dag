@@ -15,7 +15,7 @@ import pendulum
     name="k8s_test",
     namespace="default",
     in_cluster=True,
-    #config_file=?,
+    config_file=None,
 )
 def execute_in_k8s_pod():
     import time
