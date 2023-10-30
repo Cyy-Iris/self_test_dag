@@ -19,7 +19,7 @@ from airflow.operators.python import get_current_context
     schedule=None,
     start_date=pendulum.datetime(2021, 1, 1, tz="UTC"),
     catchup=False,
-    name="Gauillaume_code_test"
+    name="Gauillaume_code_test",
     tags=["k8s_python"],
     params={"pdf_path": Param("path to a pdf to run the DAG on.")},
 )
