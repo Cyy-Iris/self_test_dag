@@ -5,7 +5,7 @@ import pendulum
 
 @dag(
     schedule=None,
-    start_date=pendulum.datetime(2023, 10, 30, tz="UTC"),
+    start_date=pendulum.datetime(2023, 10, 29, tz="UTC"),
     catchup=False,
     tags=["k8s_python"],
     dag_id="dag_k8s_python",
@@ -23,7 +23,7 @@ def execute_in_k8s_pod():
     print("Hello from k8s pod")
     time.sleep(2)
 
-@task.kubernetes(image="python:3.8-slim-buster", namespace="default", in_cluster=False)
+@task.kubernetes(image="python:3.8-slim-buster", namespace="airflow", in_cluster=True)
 def print_pattern():
     n = 5
     for i in range(0, n):
