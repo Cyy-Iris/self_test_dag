@@ -13,7 +13,7 @@ import pendulum
 @task.kubernetes(
     image="python:3.8-slim-buster",
     name="k8s_test",
-    namespace="default",
+    namespace="airflow",
     in_cluster=True,
     config_file=None,
 )
