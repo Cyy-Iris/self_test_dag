@@ -49,7 +49,7 @@ def main():
             raise KeyError("DAG parameters couldn't be retrieved in current context.")
         """
         print(context)
-        filename: str = os.path.basename(["pdf_path"])
+        filename: str = os.path.basename("{{params.pdf_path}}")
         return {"s3://raw_pdf/": filename}
 
     # TODO (Guillaume): DAG could be generated automatically: a function could inspect
