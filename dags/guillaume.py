@@ -89,7 +89,7 @@ def main():
     # return airflow_io_graph
 
 
-    airflow_io_pdf = starting_task()
+    airflow_io_pdf = starting_func()
 
     # step 1: 1st task converting PDF to MD
     airflow_io_md = pdf_to_md_func(airflow_io_pdf)
