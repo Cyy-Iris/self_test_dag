@@ -13,6 +13,7 @@ import pendulum
 from airflow.decorators import dag, task
 from airflow.models.param import Param
 from airflow.operators.python import get_current_context
+from airflow.providers.cncf.kubernetes.operators.pod import KubernetesPodOperator
 
 
 @dag(
@@ -31,7 +32,7 @@ def main():
     """
     @task.kubernetes(image="python-guillaume:0.0.1", namespace="airflow", in_cluster=True)
     #def starting_task() -> dict[str, str]:
-    def starting_task():
+    def starting_task(**kwargs):
         """Starting task initiating the chain of dependency based on the DAG params.
 
         it loads the pdf file path provided as parameter of the DAG using the context
@@ -44,7 +45,10 @@ def main():
             next task and help the downstream task perform input file resolution from
             s3 folder path inputs definition.
         """
-        context = get_current_context()
+        ti = kwargs['ti']  # Access the task instance
+        context = kwargs.get('dag_run', None)
+        print("This is context: "+context)
+        #context = get_current_context()
         if "params" not in context:
             raise KeyError("DAG parameters couldn't be retrieved in current context.")
         filename: str = os.path.basename(context["params"]["pdf_path"])
