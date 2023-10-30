@@ -68,7 +68,7 @@ def main():
 
 
     # step 2: 2 tasks in parallel using previously generated MD
-    @task.kubernetes(image="python-guillaume:0.0.1", namespace="airflow", in_cluster=True)
+    @task.kubernetes(image="python-guillaume:0.0.1", namespace="airflow", arguments=["/app"],in_cluster=True)
     def md_to_ontology_func(md_local_path: str):
         from app.automodeling.tasks.pdf_to_md import md_to_ontology_task
         return md_to_ontology_task(md_local_path)
