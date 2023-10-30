@@ -1,4 +1,5 @@
 from airflow.decorators import task, dag
+from kubernetes import config
 from datetime import datetime
 import pendulum
 
@@ -14,7 +15,7 @@ import pendulum
     name="k8s_test",
     namespace="default",
     in_cluster=False,
-    config_file="/path/to/.kube/config",
+    config_file=config.load_incluster_config(),
 )
 def execute_in_k8s_pod():
     import time
