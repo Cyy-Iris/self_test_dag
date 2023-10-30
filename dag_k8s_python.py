@@ -6,7 +6,8 @@ import pendulum
     schedule=None,
     start_date=pendulum.datetime(2023, 10, 30, tz="UTC"),
     catchup=False,
-    tags=["test_k8s_python"],
+    tags=["k8s_python"],
+    dag_id="dag_k8s_python",
 )
 
 @task.kubernetes(
