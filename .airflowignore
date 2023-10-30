@@ -1,0 +1,6 @@
+automodeling/tasks/.*
+automodeling/utils/.*
+data/*
+.vscode/*
+.venv/*
+.mypy_cache/*
