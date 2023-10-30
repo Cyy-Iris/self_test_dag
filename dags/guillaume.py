@@ -14,11 +14,6 @@ from airflow.decorators import dag, task
 from airflow.models.param import Param
 from airflow.operators.python import get_current_context
 
-from automodeling.tasks.all_to_graph import all_to_graph_task
-from automodeling.tasks.md_to_ontology import md_to_ontology_task
-from automodeling.tasks.md_to_scenarios import md_to_scenarios_task
-from automodeling.tasks.pdf_to_md import pdf_to_md_task
-
 
 @dag(
     schedule=None,
@@ -33,8 +28,7 @@ def main():
     it takes as parameter a full path to a pdf file in s3. If the pdf_path parameter
     provided is only a file it will use the following folder `"s3://raw_pdf/"`.
     """
-
-    @task()
+    @task.kubernetes(image="python-guillaume:0.0.1", namespace="airflow", in_cluster=True)
     def starting_task() -> dict[str, str]:
         """Starting task initiating the chain of dependency based on the DAG params.
 
@@ -57,7 +51,10 @@ def main():
     # TODO (Guillaume): DAG could be generated automatically: a function could inspect
     # the content of the `tasks` package and resolve a DAG based on s3 folder path
     # dependencies.
-
+    from automodeling.tasks.all_to_graph import all_to_graph_task
+    from automodeling.tasks.md_to_ontology import md_to_ontology_task
+    from automodeling.tasks.md_to_scenarios import md_to_scenarios_task
+    from automodeling.tasks.pdf_to_md import pdf_to_md_task
     # step 0: initiates airflow io to resolve file using the starting task.
     airflow_io_pdf = starting_task()
 
