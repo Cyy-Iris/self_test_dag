@@ -28,6 +28,8 @@ def main():
     it takes as parameter a full path to a pdf file in s3. If the pdf_path parameter
     provided is only a file it will use the following folder `"s3://raw_pdf/"`.
     """
+
+     # step 0: initiates airflow io to resolve file using the starting task.
     @task.kubernetes(image="python-guillaume:0.0.1", namespace="airflow", in_cluster=True)
     #def starting_task() -> dict[str, str]:
     def starting_task(**context):
@@ -57,10 +59,6 @@ def main():
     # the content of the `tasks` package and resolve a DAG based on s3 folder path
     # dependencies.
 
-    # step 0: initiates airflow io to resolve file using the starting task.
-    @task.kubernetes(image="python-guillaume:0.0.1", namespace="airflow", in_cluster=True)
-    def starting_func():
-        return starting_task()
 
     # step 1: 1st task converting PDF to MD
     @task.kubernetes(image="python-guillaume:0.0.1", namespace="airflow", in_cluster=True)
@@ -89,7 +87,7 @@ def main():
     # return airflow_io_graph
 
 
-    airflow_io_pdf = starting_func()
+    airflow_io_pdf = starting_task()
 
     # step 1: 1st task converting PDF to MD
     airflow_io_md = pdf_to_md_func(airflow_io_pdf)
