@@ -46,7 +46,7 @@ def main():
             s3 folder path inputs definition.
         """
         ti = kwargs['ti']  # Access the task instance
-        context = kwargs.get('dag_run', None)
+        context = kwargs.get('Gauillaume_code_test', None)
         print("This is context: "+context)
         #context = get_current_context()
         if "params" not in context:
