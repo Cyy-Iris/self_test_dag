@@ -88,13 +88,13 @@ def main():
     airflow_io_pdf = starting_task()
 
     # step 1: 1st task converting PDF to MD
-    airflow_io_md = pdf_to_md_task(airflow_io_pdf)
+    airflow_io_md = pdf_to_md_func(airflow_io_pdf)
 
     # step 2: 2 tasks in parallel using previously generated MD
-    airflow_io_ontology = md_to_ontology_task(airflow_io_md)
-    airflow_io_scenarios = md_to_scenarios_task(airflow_io_md)
+    airflow_io_ontology = md_to_ontology_func(airflow_io_md)
+    airflow_io_scenarios = md_to_scenarios_func(airflow_io_md)
 
     # step 3: Final tasks using both outputs of previous tasks
-    airflow_io_graph = all_to_graph_task(airflow_io_ontology, airflow_io_scenarios)
+    airflow_io_graph = all_to_graph_func(airflow_io_ontology, airflow_io_scenarios)
 
 dag_run=main()
