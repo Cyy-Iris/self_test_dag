@@ -1,4 +1,5 @@
 from airflow.decorators import task, dag
+from airflow import DAG
 from kubernetes import config
 from datetime import datetime
 import pendulum
