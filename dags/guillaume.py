@@ -65,7 +65,7 @@ def main():
     # step 1: 1st task converting PDF to MD
     @task.kubernetes(image="python-guillaume:0.0.1", namespace="airflow", in_cluster=True)
     def pdf_to_md_func(local_pdf_path: str):
-        from app.automodeling.tasks.pdf_to_md import pdf_to_md_task
+        from automodeling.tasks.pdf_to_md import pdf_to_md_task
         return pdf_to_md_task(local_pdf_path)
 
 
@@ -77,13 +77,13 @@ def main():
     
     @task.kubernetes(image="python-guillaume:0.0.1", namespace="airflow", in_cluster=True)
     def md_to_scenarios_func(md_local_path:str):
-        from app.automodeling.tasks.pdf_to_md import md_to_scenarios_task
+        from automodeling.tasks.pdf_to_md import md_to_scenarios_task
         return md_to_scenarios_task(md_local_path)
 
     # step 3: Final tasks using both outputs of previous tasks
     @task.kubernetes(image="python-guillaume:0.0.1", namespace="airflow", in_cluster=True)
     def all_to_graph_func(ontology_local_path: str, scenarios_local_path: str):
-        from app.automodeling.tasks.pdf_to_md import all_to_graph_task
+        from automodeling.tasks.pdf_to_md import all_to_graph_task
         return all_to_graph_task(ontology_local_path, scenarios_local_path)
 
     # return airflow_io_graph
