@@ -1,5 +1,13 @@
 from airflow.decorators import task, dag
 from datetime import datetime
+import pendulum
+
+@dag(
+    schedule=None,
+    start_date=pendulum.datetime(2023, 10, 30, tz="UTC"),
+    catchup=False,
+    tags=["test_k8s_python"],
+)
 
 @task.kubernetes(
     image="python:3.8-slim-buster",
