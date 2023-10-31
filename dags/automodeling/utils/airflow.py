@@ -25,9 +25,7 @@ from automodeling.utils import s3
 # TODO (Guillaume): improve typing of the callables
 def airflow_task(
     s3folder_inputs: list[str], s3folder_outputs: list[str]
-) -> Callable[
-    [Callable], Callable[[Callable[FParams, FReturn]], Task[FParams, FReturn]]
-]:
+):
     """Airflow task decorator allowing to specify inputs / outputs from s3.
 
     This decorator resolves s3 folder path into local file for the wrapped function. It
@@ -52,7 +50,7 @@ def airflow_task(
 
     def decorator(
         func: Callable[..., list[tuple[str, str]]],
-    ) -> Callable[[Callable[FParams, FReturn]], Task[FParams, FReturn]]:
+    ):
         # run sanity checks on func signature:
         sig = inspect.signature(func)
 
@@ -77,7 +75,7 @@ def airflow_task(
         # k8s cluster.
         @task.kubernetes(image="python:3.8-slim-buster", namespace="airflow", in_cluster=True)
         @functools.wraps(func)
-        def mytask(*airflow_inputss: dict[str, str]) -> dict[str, str]:
+        def mytask(*airflow_inputss: dict[str, str]):
             """An airflow task auto created with the decorator.
 
             These tasks are meant to be chained using the Taskflow paradigm. In order to
