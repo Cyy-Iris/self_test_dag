@@ -71,7 +71,6 @@ def airflow_task(s3folder_inputs,s3folder_outputs):
 
         # TODO (Guillaume): we will have to adapt the task here to run as pod on the
         # k8s cluster.
-        @task.kubernetes(image="python:3.8-slim-buster", namespace="airflow", in_cluster=True)
         @functools.wraps(func)
         def mytask(*airflow_inputss):
             """An airflow task auto created with the decorator.
