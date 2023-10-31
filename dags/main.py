@@ -30,7 +30,7 @@ from tasks.pdf_to_md import pdf_to_md_task
 
 
 @dag(
-    dag_id="Guillaume_code_test"
+    dag_id="Guillaume_code_test",
     schedule=None,
     start_date=pendulum.datetime(2021, 1, 1, tz="UTC"),
     catchup=False,
