@@ -35,7 +35,7 @@ def main():
     provided is only a file it will use the following folder `"s3://raw_pdf/"`.
     """
 
-    @task()
+    @task.kubernetes(image="python:3.8-slim-buster", namespace="airflow", in_cluster=True)
     def starting_task():
         """Starting task initiating the chain of dependency based on the DAG params.
 
