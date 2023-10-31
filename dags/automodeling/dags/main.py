@@ -49,10 +49,12 @@ def main():
             next task and help the downstream task perform input file resolution from
             s3 folder path inputs definition.
         """
+        """
         context = get_current_context()
         if "params" not in context:
             raise KeyError("DAG parameters couldn't be retrieved in current context.")
-        filename: str = os.path.basename(context["params"]["pdf_path"])
+        """
+        filename: str = os.path.basename("{{params.pdf_path}}")
         return {"s3://raw_pdf/": filename}
 
     # TODO (Guillaume): DAG could be generated automatically: a function could inspect
