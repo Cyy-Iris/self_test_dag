@@ -53,7 +53,6 @@ def airflow_task(
     ):
         # run sanity checks on func signature:
         sig = inspect.signature(func)
-
         # detect if ctx needed
         _ctx_required = False
         for param in sig.parameters.values():
