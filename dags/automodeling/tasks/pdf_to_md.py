@@ -25,6 +25,7 @@ def pdf_to_md(path):
 
 @airflow_task(s3folder_inputs=["s3://raw_pdf/"], s3folder_outputs=["s3://pdf_to_md/"])
 def pdf_to_md_task(local_pdf_path):
+    from automodeling.utils.airflow import airflow_task
     """Airflow Task converting a single PDF file into MD.
 
     Notes:
