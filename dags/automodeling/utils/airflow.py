@@ -24,7 +24,7 @@ from automodeling.utils import s3
 
 # TODO (Guillaume): improve typing of the callables
 def airflow_task(
-    s3folder_inputs
+    s3folder_inputs,s3folder_outputs
 ):
     """Airflow task decorator allowing to specify inputs / outputs from s3.
 
@@ -75,7 +75,7 @@ def airflow_task(
         # k8s cluster.
         @task.kubernetes(image="python:3.8-slim-buster", namespace="airflow", in_cluster=True)
         @functools.wraps(func)
-        def mytask(*airflow_inputs):
+        def mytask(*airflow_inputss):
             """An airflow task auto created with the decorator.
 
             These tasks are meant to be chained using the Taskflow paradigm. In order to
