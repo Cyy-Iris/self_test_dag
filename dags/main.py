@@ -83,7 +83,7 @@ def main():
 
     @task.kubernetes(image="python-guillaume:0.0.1", namespace="airflow", in_cluster=True)
     def init_io_scenarios():
-        from tasks.md_to_ontology import md_to_scenarios_task
+        from tasks.md_to_scenarios import md_to_scenarios_task
         md_to_scenarios_task=md_to_scenarios_task()
         return md_to_scenarios_task
     
