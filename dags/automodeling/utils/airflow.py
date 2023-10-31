@@ -19,7 +19,7 @@ from airflow.decorators.base import FParams, FReturn, Task
 from airflow.operators.python import PythonOperator, get_current_context
 from airflow.providers.cncf.kubernetes.operators.pod import KubernetesPodOperator
 
-from utils import s3
+from automodeling.utils import s3
 
 
 # TODO (Guillaume): improve typing of the callables
