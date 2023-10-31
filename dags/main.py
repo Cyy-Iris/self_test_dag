@@ -27,7 +27,7 @@ from airflow.operators.python import get_current_context
 @dag(
     dag_id="Guillaume_code_test",
     schedule=None,
-    start_date=pendulum.datetime(2021, 1, 1, tz="UTC"),
+    start_date=pendulum.datetime(2023, 10, 30, tz="UTC"),
     catchup=False,
     tags=["k8b_python"],
     params={"pdf_path": Param("path to a pdf to run the DAG on.")},
