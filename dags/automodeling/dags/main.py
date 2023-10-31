@@ -8,7 +8,6 @@ It exposes:
     * :DAG:main: actual apache airflow DAG.
 """
 import os
-
 import pendulum
 from airflow.decorators import dag, task
 from airflow.models.param import Param
@@ -54,6 +53,7 @@ def main():
         if "params" not in context:
             raise KeyError("DAG parameters couldn't be retrieved in current context.")
         """
+        import os
         filename: str = os.path.basename("{{params.pdf_path}}")
         return {"s3://raw_pdf/": filename}
 
