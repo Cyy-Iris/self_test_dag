@@ -69,31 +69,31 @@ def main():
     @task.kubernetes(image="python-guillaume:0.0.1", namespace="airflow", in_cluster=True)
     def init_io_md():
         from tasks.pdf_to_md import pdf_to_md_task
-        pdf_to_md_task = pdf_to_md_task()
-        return pdf_to_md_task
+        pdf_to_md = pdf_to_md_task()
+        return pdf_to_md
     
 
     # step 2: 2 tasks in parallel using previously generated MD
     @task.kubernetes(image="python-guillaume:0.0.1", namespace="airflow", in_cluster=True)
     def init_io_ontology():
         from tasks.md_to_ontology import md_to_ontology_task
-        md_to_ontology_task=md_to_ontology_task()
-        return md_to_ontology_task
+        md_to_ontology=md_to_ontology_task()
+        return md_to_ontology
     
 
     @task.kubernetes(image="python-guillaume:0.0.1", namespace="airflow", in_cluster=True)
     def init_io_scenarios():
         from tasks.md_to_scenarios import md_to_scenarios_task
-        md_to_scenarios_task=md_to_scenarios_task()
-        return md_to_scenarios_task
+        md_to_scenarios=md_to_scenarios_task()
+        return md_to_scenarios
     
 
     # step 3: Final tasks using both outputs of previous tasks
     @task.kubernetes(image="python-guillaume:0.0.1", namespace="airflow", in_cluster=True)
     def init_io_all_graph():
         from tasks.all_to_graph import all_to_graph_task
-        all_to_graph_task=all_to_graph_task()
-        return all_to_graph_task
+        all_to_graph=all_to_graph_task()
+        return all_to_graph
     
     airflow_io_pdf = starting_task()
     airflow_io_md = init_io_md(airflow_io_pdf)
