@@ -21,6 +21,7 @@ from automodeling.tasks.pdf_to_md import pdf_to_md_task
 
 
 @dag(
+    dag_id:"Guillaume-code-test"
     schedule=None,
     start_date=pendulum.datetime(2023, 10,31, tz="UTC"),
     catchup=False,
