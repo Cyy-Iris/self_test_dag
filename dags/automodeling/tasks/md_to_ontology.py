@@ -53,11 +53,14 @@ def md_to_ontology_task(md_local_path):
     # the decorator :func:`airflow_task` resolve s3 folder path into local file only
     # any further processing of the files must be defined here to accomodate
     # :func:`md_to_ontology` inputs.
+    """
     with open(md_local_path, "r") as f:
         md_content: str = f.read()
-
+    """
     # call the pure logic function defined above.
-    ontology_content = md_to_ontology(md_content)
+    # ----------modified for test------------#
+   # ontology_content = md_to_ontology(md_content)
+    ontology_content = "md_content"
 
     # create the list of tuple for the decorator to correctly write back the file and
     # share the depedency with the next step.

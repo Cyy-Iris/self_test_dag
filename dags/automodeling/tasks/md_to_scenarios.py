@@ -55,16 +55,22 @@ def md_to_scenarios_task(md_local_path):
     # the decorator :func:`airflow_task` resolve s3 folder path into local file only
     # any further processing of the files must be defined here to accomodate
     # :func:`md_to_scenarios` inputs.
+    """
     with open(md_local_path, "r") as f:
         md_content: str = f.read()
-
+    """
     # call the pure logic function defined above.
+    """
     scenarios_content = md_to_scenarios(md_content)
-
+    """
     # create the list of tuple for the decorator to correctly write back the file and
     # share the depedency with the next step. Because :func:`md_to_scenarios` returns
     # a list of str we need to first join them into a single str.
-    scenarios_content_str = "\n".join(scenarios_content)
+
+    # --------Modified for test---------#
+    #scenarios_content_str = "\n".join(scenarios_content)
+    scenarios_content_str = "\n".join("senarios_content")
+
     # define output filename based on pdf name
     filename = os.path.basename(md_local_path).split(".")[0] + ".txt"
 
