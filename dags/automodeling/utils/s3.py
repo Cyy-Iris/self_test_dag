@@ -18,7 +18,7 @@ logger = logging.getLogger("airflow.task")
 CWD = "/Users/guillaumeraille/Projects/Claim/airflow-local"
 
 
-def download(s3_path, local_dest):
+def download(s3_path, local_dest=None):
     # download from s3 and returns a path in tmp ?
     logger.info(f"mock downloading file: `{s3_path}`...")
     return f"{CWD}/data/{os.path.basename(s3_path)}"
