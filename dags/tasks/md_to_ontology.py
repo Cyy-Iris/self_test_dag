@@ -12,7 +12,7 @@ it contains:
 """
 import os
 
-from automodeling.utils.airflow import airflow_task
+from utils.airflow import airflow_task
 
 
 def md_to_ontology(md):

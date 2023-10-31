@@ -12,7 +12,7 @@ it contains:
 """
 import os
 
-from automodeling.utils.airflow import airflow_task
+from utils.airflow import airflow_task
 
 
 def all_to_graph(ontology: str, scenarios: str):
