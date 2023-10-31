@@ -23,7 +23,6 @@ def pdf_to_md(path):
     # with open ... or send directly path in external lib to generate md...
     return "# Some markdown"
 
-@airflow_task(s3folder_inputs=["s3://raw_pdf/"], s3folder_outputs=["s3://pdf_to_md/"])
 def pdf_to_md_task(local_pdf_path):
     """Airflow Task converting a single PDF file into MD.
 
@@ -53,3 +52,5 @@ def pdf_to_md_task(local_pdf_path):
     # 3. prepare output in standard format list of tuple (filename, content)
     filename = os.path.basename(local_pdf_path).split(".")[0] + ".md"
     return [(filename, md_content)]
+
+airflow_task(s3folder_inputs=["s3://raw_pdf/"], s3folder_outputs=["s3://pdf_to_md/"])(pdf_to_md_task)
