@@ -17,7 +17,6 @@ It exposes:
     * :DAG:main: actual apache airflow DAG.
 """
 import os
-
 import pendulum
 from airflow.decorators import dag, task
 from airflow.models.param import Param
@@ -53,10 +52,13 @@ def main():
             next task and help the downstream task perform input file resolution from
             s3 folder path inputs definition.
         """
+        """
         context = get_current_context()
         if "params" not in context:
             raise KeyError("DAG parameters couldn't be retrieved in current context.")
-        filename: str = os.path.basename(context["params"]["pdf_path"])
+        """
+        import os
+        filename: str = os.path.basename("{{params}}")
         return {"s3://raw_pdf/": filename}
 
     # TODO (Guillaume): DAG could be generated automatically: a function could inspect
