@@ -24,7 +24,7 @@ from automodeling.utils import s3
 
 # TODO (Guillaume): improve typing of the callables
 def airflow_task(
-    s3folder_inputs, s3folder_outputs
+    s3folder_inputs
 ):
     """Airflow task decorator allowing to specify inputs / outputs from s3.
 
@@ -53,6 +53,7 @@ def airflow_task(
     ):
         # run sanity checks on func signature:
         sig = inspect.signature(func)
+
         # detect if ctx needed
         _ctx_required = False
         for param in sig.parameters.values():
@@ -74,7 +75,7 @@ def airflow_task(
         # k8s cluster.
         @task.kubernetes(image="python:3.8-slim-buster", namespace="airflow", in_cluster=True)
         @functools.wraps(func)
-        def mytask(*airflow_inputss):
+        def mytask(*airflow_inputs):
             """An airflow task auto created with the decorator.
 
             These tasks are meant to be chained using the Taskflow paradigm. In order to
@@ -107,7 +108,7 @@ def airflow_task(
                 raise KeyError("`dag_run` was not found in context provided by airflow")
 
             # build func arguments by converting s3 inputs dataset into local path.
-            func_args = {
+            func_args: dict[str, Any] = {
                 param.name: None
                 for param in sig.parameters.values()
                 if param.name != "ctx"
@@ -121,7 +122,7 @@ def airflow_task(
             if _ctx_required:
                 func_args["ctx"] = context
 
-            func_ouputs = func(**func_args)
+            func_ouputs= func(**func_args)
 
             # build airflow outputs and upload to s3 for chaining tasks.
             airflow_outputs = {}
