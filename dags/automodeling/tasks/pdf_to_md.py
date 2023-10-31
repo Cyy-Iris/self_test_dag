@@ -9,7 +9,7 @@ it exposes the following functions:
 """
 import os
 
-from utils.airflow import airflow_task
+from automodeling.utils.airflow import airflow_task
 
 def pdf_to_md(path):
     """Converts a PDF file into Markdown.
