@@ -33,7 +33,7 @@ def all_to_graph(ontology: str, scenarios: str):
     s3folder_outputs=["s3://all_to_graph/"],
 )
 def all_to_graph_task(
-    ontology_local_path: str, scenarios_local_path: str
+    ontology_local_path, scenarios_local_path
 ):
     """Airflow task wrapping :func:`all_to_graph`.
 

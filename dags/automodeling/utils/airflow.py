@@ -74,7 +74,7 @@ def airflow_task(
         # k8s cluster.
         @task.kubernetes(image="python:3.8-slim-buster", namespace="airflow", in_cluster=True)
         @functools.wraps(func)
-        def mytask(*airflow_inputss: dict[str, str]):
+        def mytask(*airflow_inputss):
             """An airflow task auto created with the decorator.
 
             These tasks are meant to be chained using the Taskflow paradigm. In order to
@@ -90,7 +90,7 @@ def airflow_task(
                 use.
             """
             # flatten all airflow inputs in case of multi input tasks:
-            airflow_inputs: dict[str, str] = {}
+            airflow_inputs = {}
             for d in airflow_inputss:
                 for k, v in d.items():
                     airflow_inputs[k] = v
@@ -107,7 +107,7 @@ def airflow_task(
                 raise KeyError("`dag_run` was not found in context provided by airflow")
 
             # build func arguments by converting s3 inputs dataset into local path.
-            func_args: dict[str, Any] = {
+            func_args = {
                 param.name: None
                 for param in sig.parameters.values()
                 if param.name != "ctx"
@@ -121,7 +121,7 @@ def airflow_task(
             if _ctx_required:
                 func_args["ctx"] = context
 
-            func_ouputs: list[tuple[str, str]] = func(**func_args)
+            func_ouputs = func(**func_args)
 
             # build airflow outputs and upload to s3 for chaining tasks.
             airflow_outputs = {}

@@ -18,13 +18,13 @@ logger = logging.getLogger("airflow.task")
 CWD = "/Users/guillaumeraille/Projects/Claim/airflow-local"
 
 
-def download(s3_path: str, local_dest: str):
+def download(s3_path, local_dest):
     # download from s3 and returns a path in tmp ?
     logger.info(f"mock downloading file: `{s3_path}`...")
     return f"{CWD}/data/{os.path.basename(s3_path)}"
 
 
-def upload(s3_path: str, content: str):
+def upload(s3_path, content):
     # upload to s3 and return path if succesful
     logger.info(f"mock uploading file: `{s3_path}`...")
     mock_path = f"{CWD}/data/{os.path.basename(s3_path)}"
