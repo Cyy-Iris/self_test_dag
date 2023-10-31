@@ -15,7 +15,7 @@ import os
 from automodeling.utils.airflow import airflow_task
 
 
-def all_to_graph(ontology: str, scenarios: str) -> str:
+def all_to_graph(ontology: str, scenarios: str):
     """Creates a json graph from ontology and scenarios.
 
     Args:
@@ -34,7 +34,7 @@ def all_to_graph(ontology: str, scenarios: str) -> str:
 )
 def all_to_graph_task(
     ontology_local_path: str, scenarios_local_path: str
-) -> list[tuple[str, str]]:
+):
     """Airflow task wrapping :func:`all_to_graph`.
 
     Notes:

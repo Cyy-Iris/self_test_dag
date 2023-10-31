@@ -34,7 +34,7 @@ def md_to_scenarios(md: str) -> list[str]:
 @airflow_task(
     s3folder_inputs=["s3://pdf_to_md/"], s3folder_outputs=["s3://md_to_scenarios/"]
 )
-def md_to_scenarios_task(md_local_path: str) -> list[tuple[str, str]]:
+def md_to_scenarios_task(md_local_path: str):
     """Airflow task wrapping :func:`md_to_scenarios`.
 
     Notes:

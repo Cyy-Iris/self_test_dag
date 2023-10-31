@@ -12,7 +12,7 @@ import os
 from automodeling.utils.airflow import airflow_task
 
 
-def pdf_to_md(path: str) -> str:
+def pdf_to_md(path: str):
     """Converts a PDF file into Markdown.
 
     Args:
@@ -26,7 +26,7 @@ def pdf_to_md(path: str) -> str:
 
 
 @airflow_task(s3folder_inputs=["s3://raw_pdf/"], s3folder_outputs=["s3://pdf_to_md/"])
-def pdf_to_md_task(local_pdf_path: str) -> list[tuple[str, str]]:
+def pdf_to_md_task(local_pdf_path: str):
     """Airflow Task converting a single PDF file into MD.
 
     Notes:
