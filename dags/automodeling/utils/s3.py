@@ -28,6 +28,8 @@ def upload(s3_path, content=None):
     # upload to s3 and return path if succesful
     logger.info(f"mock uploading file: `{s3_path}`...")
     mock_path = f"/data/{os.path.basename(s3_path)}"
+    """
     with open(mock_path, "w") as f:
         f.write(content)
+    """
     return mock_path
