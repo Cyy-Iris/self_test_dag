@@ -24,7 +24,7 @@ def download(s3_path, local_dest=None):
     return f"/data/{os.path.basename(s3_path)}"
 
 
-def upload(s3_path, content):
+def upload(s3_path, content=None):
     # upload to s3 and return path if succesful
     logger.info(f"mock uploading file: `{s3_path}`...")
     mock_path = f"/data/{os.path.basename(s3_path)}"
