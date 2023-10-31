@@ -49,7 +49,7 @@ def airflow_task(
     """
 
     def decorator(
-        func: Callable[..., list[tuple[str, str]]],
+        func
     ):
         # run sanity checks on func signature:
         sig = inspect.signature(func)
