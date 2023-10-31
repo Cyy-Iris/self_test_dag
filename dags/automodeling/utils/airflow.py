@@ -24,7 +24,7 @@ from automodeling.utils import s3
 
 # TODO (Guillaume): improve typing of the callables
 def airflow_task(
-    s3folder_inputs: list[str], s3folder_outputs: list[str]
+    s3folder_inputs, s3folder_outputs
 ):
     """Airflow task decorator allowing to specify inputs / outputs from s3.
 
