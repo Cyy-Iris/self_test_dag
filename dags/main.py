@@ -35,7 +35,7 @@ def main():
     """
 
     @task()
-    def starting_task() -> dict[str, str]:
+    def starting_task():
         """Starting task initiating the chain of dependency based on the DAG params.
 
         it loads the pdf file path provided as parameter of the DAG using the context
