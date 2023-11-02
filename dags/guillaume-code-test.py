@@ -12,6 +12,7 @@ import pendulum
 from airflow.decorators import dag, task
 from airflow.models.param import Param
 from airflow.operators.python import get_current_context
+from typing import Dict, Any
 
 from tasks.all_to_graph import all_to_graph_task
 from tasks.md_to_ontology import md_to_ontology_task
@@ -34,7 +35,7 @@ def main():
     provided is only a file it will use the following folder `"s3://raw_pdf/"`.
     """
     @task(multiple_outputs=True)
-    def starting_task():
+    def starting_task()-> dict[str, str]:
         """Starting task initiating the chain of dependency based on the DAG params.
 
         it loads the pdf file path provided as parameter of the DAG using the context
