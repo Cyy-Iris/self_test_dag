@@ -12,7 +12,7 @@ import pendulum
 from airflow.decorators import dag, task
 from airflow.models.param import Param
 from airflow.operators.python import get_current_context
-from typing import dict
+from typing import Dict,Any
 
 from tasks.all_to_graph import all_to_graph_task
 from tasks.md_to_ontology import md_to_ontology_task
