@@ -34,7 +34,7 @@ def main():
     provided is only a file it will use the following folder `"s3://raw_pdf/"`.
     """
     @task(multiple_outputs=True)
-    def starting_task() -> dict[str, str]:
+    def starting_task():
         """Starting task initiating the chain of dependency based on the DAG params.
 
         it loads the pdf file path provided as parameter of the DAG using the context
