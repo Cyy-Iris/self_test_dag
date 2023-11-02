@@ -34,7 +34,7 @@ def main():
     it takes as parameter a full path to a pdf file in s3. If the pdf_path parameter
     provided is only a file it will use the following folder `"s3://raw_pdf/"`.
     """
-    @task(multiple_outputs=True)
+    @task(multiple_outputs=True,image="apache/airflow:2.7.2-python3.11")
     def starting_task():
         """Starting task initiating the chain of dependency based on the DAG params.
 
