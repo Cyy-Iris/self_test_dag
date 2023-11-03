@@ -1,11 +1,6 @@
-import langchain
-from langchain.chat_models import AzureChatOpenAI
-from langchain.chains import LLMChain
-from langchain.prompts import ChatPromptTemplate
-from langchain.chains import LLMChain
-from langchain.prompts import ChatPromptTemplate
 import llama_index
 import flake8
+import langchain
 from airflow.decorators import dag, task
 from airflow.models.param import Param
 
