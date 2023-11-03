@@ -1,0 +1,8 @@
+from airflow.decorators import task, dag
+from airflow import DAG
+from airflow.providers.amazon.aws.transfers.s3_to_xcom import S3ToXComTransfer
+from airflow.hooks.S3_hook import S3Hook
+
+
+s3_hook = S3Hook("aws-airflow-s3")
+bucket_name = 's3://productmodellingtool-nonprod-eu-central-1-auto-modeling-logs'

@@ -11,15 +11,12 @@ it contains the following function:
 
 import logging
 import os
-from airflow.hooks.S3_hook import S3Hook
 
 logger = logging.getLogger("airflow.task")
 
 # TODO(Guillaume): remove the hardcoded local file URL...
 #CWD = "/Users/guillaumeraille/Projects/Claim/airflow-local"
 
-s3_hook = S3Hook("aws-airflow-s3")
-bucket_name = 's3://productmodellingtool-nonprod-eu-central-1-auto-modeling-logs'
 
 def download(s3_path, local_dest=None):
     # download from s3 and returns a path in tmp ?
