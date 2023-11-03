@@ -4,7 +4,7 @@ from langchain.chains import LLMChain
 from langchain.prompts import ChatPromptTemplate
 from langchain.chains import LLMChain
 from langchain.prompts import ChatPromptTemplate
-import llama-index
+import llama_index
 import flake8
 from airflow.decorators import dag, task
 from airflow.models.param import Param
