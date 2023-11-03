@@ -15,7 +15,8 @@ import os
 from utils.airflow import airflow_task
 
 
-def md_to_scenarios(md):
+
+def md_to_scenarios(md: str) -> list[str]:
     """Creates scenarios from MD content.
 
     Args:
@@ -34,7 +35,8 @@ def md_to_scenarios(md):
 @airflow_task(
     s3folder_inputs=["s3://pdf_to_md/"], s3folder_outputs=["s3://md_to_scenarios/"]
 )
-def md_to_scenarios_task(md_local_path):
+
+def md_to_scenarios_task(md_local_path: str) -> list[tuple[str, str]]:
     """Airflow task wrapping :func:`md_to_scenarios`.
 
     Notes:
