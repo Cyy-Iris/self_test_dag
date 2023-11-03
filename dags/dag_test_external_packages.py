@@ -46,4 +46,6 @@ def main():
         joke = chain.invoke({"topic": "an elephant and a flying saucer"})
         print(joke)
         
+    test_package()
+        
 main()
