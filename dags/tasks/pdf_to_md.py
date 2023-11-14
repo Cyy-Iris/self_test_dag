@@ -7,8 +7,8 @@ it exposes the following functions:
 """
 import os
 
-from utils.utils import airflow_task
-from task_logic.pdf_to_md.main import pdf_to_md
+from dags.utils.utils import airflow_task
+from dags.task_logic.pdf_to_md.main import pdf_to_md
 
 
 @airflow_task(
