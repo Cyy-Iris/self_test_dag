@@ -11,7 +11,7 @@ it contains:
 
 """
 import os
-from my_modules.utils.utils import airflow_task
+from mymodules.utils.utils import airflow_task
 
 
 def md_to_scenarios(md: str) -> list[str]:

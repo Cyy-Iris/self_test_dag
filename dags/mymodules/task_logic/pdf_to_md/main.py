@@ -1,5 +1,5 @@
 from langchain.document_loaders import PyPDFLoader
-from utils import (
+from mymodules.task_logic.pdf_to_md.utils import (
     remove_pages,
     merge_pages,
     POST_PROCESSING_STEPS,

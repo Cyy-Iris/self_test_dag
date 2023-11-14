@@ -12,7 +12,7 @@ it contains:
 """
 import os
 
-from dags.my_modules.utils.utils import airflow_task
+from dags.mymodules.utils.utils import airflow_task
 
 
 def md_to_ontology(md: str) -> str:
