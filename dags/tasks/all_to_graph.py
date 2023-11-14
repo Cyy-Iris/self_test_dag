@@ -12,7 +12,7 @@ it contains:
 """
 import os
 
-from dags.mymodules.utils.utils import airflow_task
+from utils.utils import airflow_task
 
 
 def all_to_graph(ontology: str, scenarios: str) -> str:

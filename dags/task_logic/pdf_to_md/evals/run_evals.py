@@ -1,5 +1,5 @@
-from mymodules.task_logic.pdf_to_md.evals import eval_page_nr_removed
-from mymodules.task_logic.utils.dataset import load_data
+from task_logic. pdf_to_md.evals import eval_page_nr_removed
+from task_logic.utils.dataset import load_data
 
 
 

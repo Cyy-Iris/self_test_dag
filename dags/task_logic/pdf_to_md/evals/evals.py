@@ -1,5 +1,5 @@
-from mymodules.task_logic.pdf_to_md.utils import remove_page_nums
-from mymodules.task_logic.utils.utils import print_differences
+from task_logic.pdf_to_md.utils import remove_page_nums
+from task_logic.utils.utils import print_differences
 
 
 def eval_footnotes(dataset):
