@@ -20,7 +20,7 @@ from airflow.decorators import task
 from airflow.decorators.base import FParams, FReturn, Task
 from airflow.operators.python import get_current_context
 
-from dags.my_modules.s3_utils.file_storage_layer import FileStorageOperations
+from my_modules.s3_utils.file_storage_layer import FileStorageOperations
 
 
 # TODO (Guillaume): improve typing of the callables
