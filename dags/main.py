@@ -17,7 +17,7 @@ from airflow.operators.python import get_current_context
 # from automodeling.tasks.all_to_graph import all_to_graph_task
 # from automodeling.tasks.md_to_ontology import md_to_ontology_task
 # from automodeling.tasks.md_to_scenarios import md_to_scenarios_task
-from automodeling.airflow.tasks.pdf_to_md import pdf_to_md_task
+from dags.my_modules.tasks.pdf_to_md import pdf_to_md_task
 
 
 @dag(

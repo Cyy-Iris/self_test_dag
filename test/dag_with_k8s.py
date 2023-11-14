@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 import numpy as np
-from airflow import DAG
+from modules.utils import DAG
 from airflow.providers.cncf.kubernetes.operators.pod import KubernetesPodOperator
 import logging
 

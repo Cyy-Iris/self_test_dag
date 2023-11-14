@@ -1,5 +1,5 @@
 from langchain.document_loaders import PyPDFLoader
-from automodeling.tasks.pdf_to_md.utils import (
+from dags.my_modules.task_logic.pdf_to_md.utils import (
     remove_pages,
     merge_pages,
     POST_PROCESSING_STEPS,
